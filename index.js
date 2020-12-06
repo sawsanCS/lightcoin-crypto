@@ -3,7 +3,6 @@ class Account {
 
   constructor(username) {
     this.username = username;
-    // Have the account balance start at $0 since that makes more sense.
     this.balance = 0;
   }
 
@@ -14,21 +13,25 @@ class Transaction {
     this.amount  = amount;
     this.account = account;
   }
+  commit() {
+    this.account.balance += this.value;
+  }
 
 }
 
 class Deposit extends Transaction {
 
-  commit() {
-    this.account.balance += this.amount;
+  get value() {
+    return this.amount;
   }
+
 
 }
 
 class Withdrawal extends Transaction {
 
-  commit() {
-    this.account.balance -= this.amount;
+  get value() {
+    return -this.amount;
   }
 
 }
